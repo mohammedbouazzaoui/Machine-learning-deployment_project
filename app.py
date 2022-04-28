@@ -76,9 +76,8 @@ def data():
         house_json={"data": {"area": 9000,"property-type": "APARTMENT" ,"rooms-number": 5}}
         
         
-        
         prediction_price=predictprice(house_json)
         
         return render_template('predict.html',prediction_price=prediction_price,house_json=house_json)
  
-app.run(host='localhost', port=5000)
+#app.run(host='localhost', port=5000)
