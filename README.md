@@ -1,3 +1,21 @@
+virtualenv venv
+pip install Flask
+pip install gunicorn
+
+pip freeze
+
+click==8.1.2
+colorama==0.4.4
+Flask==2.1.1
+gunicorn==20.1.0
+importlib-metadata==4.11.3
+itsdangerous==2.1.2
+Jinja2==3.1.1
+MarkupSafe==2.1.1
+Werkzeug==2.1.1
+zipp==3.8.0
+
+
 
 # API deployment
 
