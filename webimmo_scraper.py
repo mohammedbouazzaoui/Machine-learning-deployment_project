@@ -28,7 +28,8 @@ import pandas as pd
 
 
 #every webpage gives 31 links to houses
-MAXPAGE=333
+#MAXPAGE=333
+MAXPAGE=10
 home_links=[]
 for loop in range (1,MAXPAGE):
 
@@ -67,7 +68,7 @@ mycleanlist = list(dict.fromkeys(home_links))
 
        
 #write the url links to a file 
-with open("home_links.txt","a+") as fp:
+with open("./data/home_links.txt","a+") as fp:
     for url in mycleanlist:
         fp.write(url+"\n")
     fp.close()  
@@ -78,7 +79,7 @@ with open("home_links.txt","a+") as fp:
 # it uses the urls from file 'home_links.txt'
 
 firsttime=True
-with open("home_links.txt","r") as fz:
+with open("./data/home_links.txt","r") as fz:
     
     for url in fz:
         
@@ -115,8 +116,8 @@ with open("home_links.txt","r") as fz:
         # Append the dataframe objects to our deliverable file
         # The first time also put a header
         if  firsttime:
-            df.to_csv("data_homes.csv", mode='a', header=True)
+            df.to_csv("./data/data_homes.csv", mode='a', header=True)
             firsttime = False
         else:
-            df.to_csv("data_homes.csv", mode='a', header=False)
+            df.to_csv("./data/data_homes.csv", mode='a', header=False)
 
