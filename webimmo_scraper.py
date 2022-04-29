@@ -116,8 +116,8 @@ with open("./data/home_links.txt","r") as fz:
         # Append the dataframe objects to our deliverable file
         # The first time also put a header
         if  firsttime:
-            df.to_csv("./data/data_homes.csv", mode='a', header=True)
+            df.to_csv("./data/data_homes.csv", mode='a', header=True, index = False)
             firsttime = False
         else:
-            df.to_csv("./data/data_homes.csv", mode='a', header=False)
+            df.to_csv("./data/data_homes.csv", mode='a', header=False, index = False)
 

@@ -1,0 +1,44 @@
+classified.type,classified.subtype,classified.price,classified.transactionType,classified.zip,classified.kitchen.type,classified.building.constructionYear,classified.building.condition,classified.energy.heatingType,classified.certificates.primaryEnergyConsumptionLevel,classified.bedroom.count,classified.land.surface,classified.atticExists,classified.basementExists,classified.outdoor.garden.surface,classified.outdoor.terrace.exists,classified.specificities.SME.office.exists,classified.wellnessEquipment.hasSwimmingPool,classified.parking.parkingSpaceCount.indoor,classified.parking.parkingSpaceCount.outdoor,classified.condition.isNewlyBuilt,customer.name,customer.family
+house,house,349000.0,for sale,6940,semi equipped,1900.0,good,fueloil,315.0,7.0,516.0,True,,359.0,True,,,,,False,we invest marche,agency
+house,house,650000.0,for sale,1200,installed,1930.0,to be done up,gas,263.0,4.0,95.0,,True,30.0,True,True,,1.0,1.0,False,expertissimmo,agency
+house,house,225000.0,for sale,4000,not installed,1955.0,good,gas,398.0,3.0,145.0,,True,84.0,True,,,,,False,groupe cadimmo trooz-liège-sprimont,agency
+house,house,750000.0,for sale,1040,installed,1918.0,good,gas,206.0,5.0,110.0,,True,60.0,True,,,,,False,century 21 cinquantenaire,agency
+house,house,316000.0,for sale,8700,semi equipped,1937.0,good,gas,449.0,4.0,280.0,,,,,,,1.0,,False,immo beguin,agency
+house,town house,550000.0,for sale,1090,hyper equipped,1934.0,to be done up,gas,303.0,6.0,221.0,,True,65.0,True,,,1.0,2.0,False,nesting,agency
+house,apartment block,675000.0,for sale,8000,hyper equipped,2022.0,just renovated,gas,138.0,3.0,126.0,,,18.0,,,,,,False,huys noord immobiliën,agency
+house,house,695000.0,for sale,1950,hyper equipped,1990.0,good,gas,228.0,3.0,233.0,,,95.0,True,,,1.0,3.0,False,immoexpat laura iglesias,agency
+house,mansion,285000.0,for sale,9600,installed,1945.0,just renovated,gas,208.0,5.0,156.0,True,True,,True,True,,,,False,dmg vastgoed,agency
+house,house,315000.0,for sale,3010,semi equipped,1949.0,to renovate,gas,800.0,4.0,76.0,,True,,True,,,,,False,century 21 skyline,agency
+house,house,495000.0,for sale,1020,hyper equipped,1935.0,as new,gas,273.0,4.0,110.0,,True,,True,True,,,,False,abita agence immobilière scrl,agency
+house,house,199500.0,for sale,4400,not installed,1957.0,to be done up,fueloil,563.0,4.0,1036.0,,True,,True,,,1.0,,False,trevi rasquain,agency
+house,apartment block,425000.0,for sale,1030,not installed,1926.0,to be done up,gas,450.0,5.0,117.0,True,True,,True,True,,,,False,expertissimmo,agency
+house,house,425000.0,for sale,1030,not installed,1926.0,to be done up,gas,450.0,5.0,117.0,True,True,,True,True,,,,False,expertissimmo,agency
+house,house,500000.0,for sale,1200,semi equipped,1956.0,good,gas,505.0,4.0,290.0,True,True,190.0,True,,,1.0,1.0,False,expertissimmo,agency
+house,bungalow,525000.0,for sale,1970,hyper equipped,1980.0,as new,gas,296.0,3.0,821.0,True,,700.0,True,,,1.0,2.0,False,century 21 home sweet home,agency
+house,apartment block,825000.0,for sale,1030,semi equipped,1960.0,good,gas,272.0,4.0,155.0,,,,,,,,,False,expertissimmo,agency
+house,house,179000.0,for sale,2870,installed,1887.0,to be done up,gas,316.0,2.0,86.0,,,,True,,,,,False,trevi axus,agency
+house,house,245000.0,for sale,5330,semi equipped,1975.0,good,electric,531.0,3.0,1373.0,True,,12.0,True,,,1.0,3.0,False,expertissimmo,agency
+house,house,265000.0,for sale,9600,installed,1925.0,just renovated,gas,192.0,3.0,675.0,True,,450.0,True,,,,,False,dmg vastgoed,agency
+house,house,269500.0,for sale,6800,not installed,1975.0,to renovate,fueloil,463.0,4.0,929.0,,True,820.0,True,,,1.0,1.0,False,honesty libramont - 6 bureaux proches de chez vous,agency
+house,villa,1150000.0,for sale,9551,hyper equipped,2013.0,as new,gas,93.0,6.0,1154.0,True,,700.0,True,,True,1.0,6.0,False,immo da vinci,agency
+house,house,239000.0,for sale,7900,semi equipped,1961.0,to be done up,fueloil,428.0,2.0,396.0,,True,,,,,1.0,,False,immo beguin,agency
+house,villa,239000.0,for sale,7900,semi equipped,1961.0,to be done up,fueloil,428.0,2.0,396.0,,True,,,,,1.0,,False,immo beguin,agency
+house,house,262500.0,for sale,8790,installed,1963.0,good,gas,428.0,3.0,247.0,,,,True,True,,,,False,immo beguin,agency
+house,house,350000.0,for sale,1800,,1940.0,good,gas,368.0,4.0,174.0,,,80.0,True,,,,1.0,False,delfimmo,agency
+house,house,945000.0,for sale,1950,semi equipped,1965.0,good,gas,262.0,6.0,413.0,True,True,250.0,True,True,,1.0,2.0,False,bathim &amp; co l’immobilier sur mesure,agency
+house,apartment block,495000.0,for sale,1040,,,,,,0.0,0.0,,,,True,,,,,False,hamilton real estate sa,agency
+house,mixed use building,529000.0,for sale,1880,installed,1950.0,good,gas,277.0,5.0,343.0,True,True,100.0,True,,,1.0,,False,immo rottiers,agency
+house,town house,595000.0,for sale,1180,,1955.0,good,gas,357.0,2.0,195.0,,True,125.0,True,True,,,,False,era châtelain,agency
+house,villa,335000.0,for sale,7011,,,as new,electric,,4.0,599.0,,,,,,,2.0,2.0,False,maryvonne dumonceau immobilière,agency
+house,house,325000.0,for sale,8580,,1950.0,good,pellet,288.0,3.0,313.0,,True,,,,,,,False,era becue,agency
+apartment,duplex,299500.0,for sale,2200,,,,,,3.0,,,,,True,,,,,False,immpact,property_developer
+house,villa,939000.0,for sale,2630,hyper equipped,,as new,gas,76.0,3.0,820.0,,,,True,,,,,False,reds group,agency
+house,house,359000.0,for sale,2180,hyper equipped,,as new,gas,178.0,3.0,105.0,,,35.0,,,,,,False,reds group,agency
+house,apartment block,975000.0,for sale,1090,not installed,1933.0,to renovate,gas,235.0,9.0,70.0,,True,,True,,,,,False,gestea sprl,real_estate_agency
+house,exceptional property,1085000.0,for sale,1390,usa hyper equipped,2002.0,just renovated,fueloil,254.0,4.0,1180.0,True,True,615.0,True,True,True,,5.0,False,l&#039;immobilère du golf,agency
+house,house,215000.0,for sale,9600,hyper equipped,1930.0,good,gas,252.0,2.0,180.0,,,80.0,True,True,,,,False,dmg vastgoed,agency
+house,house,485000.0,for sale,6700,installed,1966.0,good,fueloil,461.0,3.0,865.0,True,True,758.0,True,True,,1.0,3.0,False,we invest sud-luxembourg,agency
+house,house,715000.0,for sale,1180,hyper equipped,1950.0,as new,gas,232.0,5.0,173.0,True,,,True,,,1.0,1.0,False,orientations,agency
+house,house,195000.0,for sale,1325,installed,1948.0,to be done up,pellet,471.0,2.0,78.0,,True,,,,,,2.0,False,gilmont immobilier,agency
+house,house,219000.0,for sale,9600,hyper equipped,1920.0,good,gas,269.0,4.0,453.0,,,300.0,True,,,,,False,dmg vastgoed,agency
+house,house,260000.0,for sale,5004,semi equipped,1949.0,to be done up,fueloil,631.0,2.0,486.0,,True,350.0,True,True,,2.0,2.0,False,trust real estate sprl,agency
