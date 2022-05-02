@@ -1,31 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Apr 28 09:15:43 2022
+Created on Thu Apr 28 14:12:19 2022
 
 @author: bmadmin
-
-
-
-#### Step 3: Fit your data
-
-Fit your data to your model.
-
-In the `predict/` folder:
-
-- Create the `prediction.py` file that will contain all the code used to predict a new house's price.
-- Your file should contain a function `train()` that will create and store the model and a function `predict()` that will take your preprocessed data as an input and return a price as output using your stored model.
 """
 
 
-def train(house_json):
-        
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import pandas as pd
-    
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+
+
+def createmodel(selected_model: str,trainratio: int,balance: bool):
     # read data
     #
-    df = pd.read_csv("./data/data_homes_cleaned.csv")
+    
+    # parameter balance : NOT USED YET
+    
+    df = pd.read_csv("../data/data_homes_cleaned.csv")
     
     
     Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
@@ -57,16 +51,16 @@ def train(house_json):
     6. Display the score of your model with `X_test` and `y_test`.
     '''
     #print(X)
+    trainratio=trainratio/100
     from sklearn.model_selection import train_test_split
-    X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=33, train_size=0.8)
+    X_train, X_test, y_train, y_test = train_test_split(X,y, random_state=42, train_size=trainratio)
     
-    from sklearn.linear_model import LinearRegression
-    #X_train=X_train.reshape(-1, 1)
-    #y_train=y_train.reshape(-1, 1)
-    regressor=LinearRegression().fit(X_train,y_train)
-    
-    print("regressor score:",regressor.score(X_train, y_train))
-    
+    if selected_model == 'linearregression':
+        from sklearn.linear_model import LinearRegression
+        regressor=LinearRegression().fit(X_train,y_train)
+        
+        print("regressor score:",regressor.score(X_train, y_train))
+        
     
     ypred=regressor.predict(X_test)
     #X_test
@@ -78,16 +72,6 @@ def train(house_json):
     plt.xlabel('X Label')
     plt.ylabel('Y Label')
 
-    return(ypred)
 
 
-def predictprice(house_json):
-    '''
-      house_json={"data": 
-                  {"constructionYear": constructionYear,
-                   "gardensurface":gardensurface}
-                  }
-    '''
-    result=train(house_json)
-    print("@@@@@@@@@@@@@@",result)
-    return result
+

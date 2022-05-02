@@ -29,7 +29,7 @@ import pandas as pd
 
 #every webpage gives 31 links to houses
 #MAXPAGE=333
-MAXPAGE=10
+MAXPAGE=2
 home_links=[]
 for loop in range (1,MAXPAGE):
 
