@@ -217,4 +217,4 @@ def model_load_selected():
 #clean_immodata("./data/data_homes.csv","./data/data_homes_cleaned.csv")
 
 
-app.run(host='localhost', port=5000)
+#app.run(host='localhost', port=5000)
