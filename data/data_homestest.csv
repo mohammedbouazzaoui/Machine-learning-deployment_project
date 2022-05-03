@@ -1,0 +1,85 @@
+classified.basementExists,classified.specificities.SME.office.exists,classified.parking.parkingSpaceCount.outdoor,classified.condition.isNewlyBuilt,customer.name,customer.family,classified.type,classified.subtype,classified.price,classified.transactionType,classified.zip,classified.kitchen.type,classified.building.constructionYear,classified.building.condition,classified.energy.heatingType,classified.certificates.primaryEnergyConsumptionLevel,classified.bedroom.count,classified.land.surface,classified.atticExists,classified.outdoor.garden.surface,classified.outdoor.terrace.exists,classified.wellnessEquipment.hasSwimmingPool,classified.parking.parkingSpaceCount.indoor
+,,,,,,house,house,1325000,for sale,1190,not installed,1922,good,fueloil,534,6,800,0,None,1,0,1
+,,,,,,house,house,338744,for sale,3520,installed,2022,None,gas,None,3,370,0,355,0,0,1
+,,,,,,house,house,2950000,for sale,1050,hyper equipped,1984,as new,None,319,2,180,0,None,1,0,None
+,,,,,,house group,house group,283000 - 304000,for sale,3900,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,220000 - 259000,for sale,6150,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,316937 - 416492,for sale,2100,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,321000 - 361000,for sale,8430,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,338215,for sale,3520,installed,2022,None,gas,None,3,406,0,406,0,0,1
+,,,,,,house,house,301322,for sale,3840,installed,2022,None,gas,None,3,420,0,None,0,0,None
+,,,,,,house,house,310210,for sale,3840,installed,2022,None,gas,None,3,344,0,None,0,0,1
+,,,,,,house,house,342866,for sale,3840,installed,2022,None,gas,None,3,993,1,None,0,0,None
+,,,,,,house,house,342866,for sale,3840,installed,2022,None,gas,None,3,993,1,None,0,0,None
+,,,,,,house,house,316748,for sale,3840,installed,2022,None,gas,None,3,341,0,None,0,0,1
+,,,,,,house,house,320548,for sale,3840,installed,2022,None,gas,None,3,394,0,None,0,0,1
+,,,,,,house,house,266885,for sale,3840,installed,2022,None,gas,None,3,341,0,None,0,0,None
+,,,,,,house,house,266885,for sale,3840,installed,2022,None,gas,None,3,341,0,None,0,0,None
+,,,,,,house,house,276075,for sale,3582,installed,2022,None,gas,None,3,368,1,368,0,0,None
+,,,,,,house,house,285975,for sale,3582,installed,2022,None,gas,None,3,381,1,381,0,0,None
+,,,,,,house group,house group,303000 - 303000,for sale,8800,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,270000 - 270000,for sale,4430,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,289000 - 289000,for sale,9620,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,exceptional property,600000,for sale,4500,None,None,None,gas,467,5,320,0,None,1,0,None
+,,,,,,house,castle,1900000,for sale,7133,installed,1800,good,fueloil,None,8,30000,1,None,1,0,2
+,,,,,,house,house,266275,for sale,3840,installed,2022,None,gas,None,3,410,0,None,0,0,None
+,,,,,,house,house,266275,for sale,3840,installed,2022,None,gas,None,3,410,0,None,0,0,None
+,,,,,,house,house,349850,for sale,3582,installed,2022,None,gas,None,3,467,1,467,0,0,None
+,,,,,,house,exceptional property,3380000,for sale,1150,hyper equipped,2005,as new,gas,159,7,1390,1,None,1,1,2
+,,,,,,house,exceptional property,750000,for sale,1370,hyper equipped,1814,as new,fueloil,223,5,769,0,None,1,0,1
+,,,,,,house,house,249995,for sale,6860,None,2020,as new,pellet,None,3,339,0,200,1,0,1
+,,,,,,house,house,185000,for sale,7370,None,None,None,gas,407,1,215,0,None,0,0,None
+,,,,,,house,house,185000,for sale,7370,None,None,None,gas,407,1,215,0,None,0,0,None
+,,,,,,house group,house group,162000 - 329500.72,for sale,8800,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,495100,for sale,2220,hyper equipped,2022,as new,gas,30,4,850,0,None,0,0,None
+,,,,,,house group,house group,247964 - 309838,for sale,8790,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,330816 - 330816,for sale,7800,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,villa,3900000,for sale,1180,installed,None,good,None,555,5,10000,1,None,1,0,2
+,,,,,,house group,house group,6250 - 279475,for sale,8400,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,275000,for sale,4260,not installed,2000,good,fueloil,None,4,500,0,None,1,0,None
+,,,,,,house group,house group,230610.01 - 284058.62,for sale,8940,None,None,None,None,None,None,None,0,None,0,0,1
+,,,,,,house,house,699000,for sale,9990,hyper equipped,2012,None,None,348,4,410,0,None,0,0,None
+,,,,,,house,house,275000,for sale,4260,not installed,2000,None,None,None,4,500,0,None,0,0,None
+,,,,,,house,house,275000,for sale,4260,not installed,2000,None,None,None,4,500,0,None,0,0,None
+,,,,,,house group,house group,349000 - 390350,for sale,2590,None,None,None,None,99,None,None,0,None,0,0,None
+,,,,,,house group,house group,302500 - 302500,for sale,3840,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,68000 - 324000,for sale,1357,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,261440.22 - 290558.87,for sale,8600,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house group,house group,206954 - 301500,for sale,4100,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,799000,for sale,9200,installed,1930,good,gas,296,4,181,0,None,0,0,None
+,,,,,,house,exceptional property,4950000,for sale,1190,hyper equipped,1968,as new,fueloil,484,6,4895,0,None,1,1,3
+,,,,,,house,house,2450000,for sale,2018,None,1873,None,None,255,7,446,0,None,1,0,None
+,,,,,,house,house,2450000,for sale,2018,None,1873,None,None,255,7,446,0,None,1,0,None
+,,,,,,house,house,2450000,for sale,2018,usa hyper equipped,1873,as new,gas,255,6,266,0,266,1,0,None
+,,,,,,house group,house group,295000 - 295000,for sale,8480,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,exceptional property,820000,for sale,9420,hyper equipped,2003,as new,gas,218,3,10000,1,None,1,0,1
+,,,,,,house,country cottage,1250000,for sale,8380,installed,None,as new,fueloil,570,7,10534,0,None,1,0,2
+,,,,,,house,country cottage,1250000,for sale,8380,installed,None,as new,fueloil,570,7,10534,0,None,1,0,2
+,,,,,,house,house,360600,for sale,9255,hyper equipped,None,as new,gas,None,3,500,0,None,1,0,None
+,,,,,,house group,house group,293511.88 - 293511.88,for sale,8530,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,325000,for sale,7730,installed,None,None,gas,239,3,394,0,156,1,0,3
+,,,,,,house,house,325000,for sale,7730,installed,None,None,gas,239,3,394,0,156,1,0,3
+,,,,,,house group,house group,360000 - 441000,for sale,9030,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,406000,for sale,2870,hyper equipped,2022,as new,gas,30,3,436,1,None,0,0,None
+,,,,,,house,house,406000,for sale,2870,hyper equipped,2022,as new,gas,30,3,426,1,None,0,0,None
+,,,,,,house,exceptional property,739000,for sale,9100,installed,1850,good,gas,236,9,320,1,1,1,0,None
+,,,,,,house,farmhouse,1200000,for sale,8700,installed,None,good,fueloil,442,5,20000,1,None,0,0,None
+,,,,,,house group,house group,389990 - 459189,for sale,2580,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,house,750000,for sale,7943,installed,None,good,fueloil,574,9,1089,0,None,1,0,1
+,,,,,,house,house,520000,for sale,1040,hyper equipped,None,None,gas,None,4,0,1,None,1,0,None
+,,,,,,house group,house group,395000 - 445500,for sale,8710,None,None,None,None,None,None,None,0,None,0,0,None
+,,,,,,house,bungalow,178000,for sale,4032,installed,1972,just renovated,gas,None,2,236,0,115,1,0,None
+,,,,,,house,bungalow,178000,for sale,4032,installed,1972,just renovated,gas,None,2,236,0,115,1,0,None
+,,,,,,house,apartment block,249000,for sale,4030,None,None,None,fueloil,None,7,0,0,None,1,0,None
+,,,,,,house,exceptional property,2399000,for sale,8000,hyper equipped,1919,as new,gas,None,5,334,1,100,1,0,1
+,,,,,,house group,house group,274363.33 - 274363.33,for sale,8840,None,None,None,None,None,None,None,0,None,0,0,1
+,,,,,,house,house,550000,for sale,1495,None,None,to renovate,fueloil,596,5,4395,0,None,0,0,3
+,,,,,,house,house,99000,for sale,6042,None,None,to renovate,fueloil,390,3,140,1,60,1,0,None
+,,,,,,house,house,99000,for sale,6042,None,None,to renovate,fueloil,390,3,140,1,60,1,0,None
+,,,,,,house,house,295000,for sale,8480,installed,2020,as new,None,40,3,0,0,150,0,0,None
+,,,,,,house,house,295000,for sale,8480,installed,2020,as new,None,40,3,0,0,150,0,0,None
+,,,,,,house,exceptional property,2950000,for sale,2000,None,1900,as new,gas,665,7,749,0,None,1,0,None
+,,,,,,house,mansion,289000,for sale,8400,installed,1900,as new,gas,284,3,0,0,None,1,0,None
+,,,,,,house,house,595000,for sale,2880,None,2020,good,None,None,3,0,0,17,1,0,None
+,,,,,,house,house,595000,for sale,2880,None,2020,good,None,None,3,0,0,17,1,0,None
+,,,,,,house,house,368800,for sale,9120,hyper equipped,2022,as new,gas,30,3,185,0,None,0,0,None

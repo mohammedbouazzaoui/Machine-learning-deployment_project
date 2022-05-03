@@ -26,7 +26,9 @@ from model import Model
 from model import Defmodel
 from model import Inputdata
 
-from webscraper import scraper
+#NOT USED FOR NOW
+#from webscraper import scraper
+######################################
 from prediction import predictprice
 from cleaning_data import clean_immodata
 import pandas as pd
@@ -175,7 +177,9 @@ def webscraper():
 @app.route('/webscraper_run/', methods = ['POST', 'GET'])
 def webscraperrun():
     #start scraper
-    scraper()
+    #NOT USED FOR NOW
+    #scraper()
+    #################
     print("past scraper")
     return render_template('main.html')   
 
@@ -277,4 +281,4 @@ def model_load_selected():
         #return message
 '''
 
-#app.run(host='localhost', port=5000)
+app.run(host='localhost', port=5000)
