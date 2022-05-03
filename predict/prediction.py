@@ -15,7 +15,7 @@ In the `predict/` folder:
 - Create the `prediction.py` file that will contain all the code used to predict a new house's price.
 - Your file should contain a function `train()` that will create and store the model and a function `predict()` that will take your preprocessed data as an input and return a price as output using your stored model.
 """
-
+import pandas as pd
 
 def train(house_json):
         
@@ -81,7 +81,7 @@ def train(house_json):
     return(ypred)
 
 
-def predictprice(house_json):
+def predictprice2(house_json):
     '''
       house_json={"data": 
                   {"constructionYear": constructionYear,
@@ -89,5 +89,51 @@ def predictprice(house_json):
                   }
     '''
     result=train(house_json)
+    print("@@@@@@@@@@@@@@",result)
+    return result
+
+def predictprice(model,house_json):
+    print("in predictprice",house_json)
+    '''
+      house_json={"constructionYear": constructionYear,
+                   "gardensurface":gardensurface}
+                
+    '''
+         
+    Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
+    ycol=['classified.price']
+    #Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
+    
+    #df=df[['classified.zip','classified.price','classified.building.constructionYear']]
+    #df=df[Xycol]
+    
+    # prepare
+    # finalclean
+    #df['classified.building.constructionYear']=df['classified.building.constructionYear'][df['classified.building.constructionYear'] == 'None'].replace('None',np.nan)
+    #df=df.dropna()
+    #df=df[df['classified.building.constructionYear'] != 'None']
+    #
+    #X=df[['classified.zip','classified.building.constructionYear']]
+    #y=df[['classified.price']]
+    #data = {'Name':['Tom', 'nick', 'krish', 'jack'],
+    #    'Age':[20, 21, 19, 18]}
+    #df2 = pd.DataFrame(data, index =['first', 'second'],
+      #             columns =['a', 'b1'])
+    # Create DataFrame
+    #df = pd.DataFrame(data)
+    
+    
+    #X=df[Xcol]
+    #y=df[ycol]
+    #print(X,y)   
+    #Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
+    #ycol=['classified.price']
+    #Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
+    data=[house_json['constructionYear'],house_json['gardensurface']]
+    print("###@@@$$$",data,Xcol)
+    X=pd.DataFrame([data],columns=Xcol)
+    print("@@@@@X@@@@",X)
+    result=model.predict(X)
+
     print("@@@@@@@@@@@@@@",result)
     return result

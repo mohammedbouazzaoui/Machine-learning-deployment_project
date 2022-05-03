@@ -39,7 +39,7 @@ class Inputdata:
 
         
     def split_data(self):
-        print("$$$$$$$$$$$$$$$$$$$$",self.Xy.columns)
+        #print("$$$$$$$$$$$$$$$$$$$$",self.Xy.columns)
         self.X=self.Xy.drop(columns=[self.yname])
         self.y=self.Xy[self.yname]
 
@@ -50,39 +50,44 @@ class Inputdata:
         pass
     
 class Defmodel:
-    def __init__(self, model, filename: str):
-        print("inDefModel",model,filename)
+    def __init__(self,filename: str,  model = []):
+        #print("inDefModel",model,filename)
         self.model = model
         self.filename = filename
         
     def save(self):
-        print("111$$$###@@@",self.filename)
+        #print("111$$$###@@@",self.filename)
         pickle.dump(self.model, open(self.filename, 'wb'))
-        print("2222$$$###@@@",self.filename)
+        #print("2222$$$###@@@",self.filename)
         
     def load(self):
         # Function : loads a model file
         # load the model from disk
         self.model = pickle.load(open(self.filename, 'rb'))
-
+    def predict_model(self,X):
+        #ypred=self.mdl.predict(X)
+        ypred=self.model.predict(X)
+        return ypred
 
 class Model(Defmodel):
-    def __init__(self, model, filename: str = "./model/savedmodels/dummymodel.model"):
-        print("inModel")
-        super().__init__(model,filename)
+    def __init__(self, filename: str, model):
+        #print("inModel")
+        super().__init__(filename, model)
         self.model = model
         self.filename = filename
-        self.mdl=[]
+        #self.mdl=[]
         
         
     def fit_model(self,X_train,y_train): #train the model
-        print("5555@@@@@@@@@@@")
-        self.mdl=self.model.fit(X_train,y_train)
-        print("66665555@@@@@@@@@@@")
+        #print("5555@@@@@@@@@@@")
+        #self.mdl=self.model.fit(X_train,y_train)
+        self.model.fit(X_train,y_train)
+        #print("66665555@@@@@@@@@@@")
     
     
     def predict_model(self,X):
-        ypred=self.mdl.predict(X)
+        #ypred=self.mdl.predict(X)
+        ypred=self.model.predict(X)
         return ypred
     
     def test_model():
