@@ -1,0 +1,35 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue May  3 22:32:13 2022
+
+@author: bmadmin
+"""
+
+
+{% include 'navigator.html' %}
+
+{% endblock %}
+
+<html>
+    <body>
+  
+        <h3>Customer view :</h3>
+        <h3>""</h3>
+
+<form action="/customerview_select/" method = "POST">
+  <label for="models">Choose a model:</label>
+  <select name="models" id="cars">
+    <option value="model1">{{a[0]}}</option>
+    <option value="model2">{{a[1]}}</option>
+    <option value="model3">{{a[2]}}</option>
+    <option value="model4">{{a[3]}}</option>
+    <option value="model5">{{a[4]}}</option>
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+
+</body>
+</html>

@@ -23,7 +23,7 @@ sys.path.append("./model")
 
 
 from model import Model
-from model import Defmodel
+#from model import Defmodel
 from model import Inputdata
 
 #NOT USED FOR NOW
@@ -31,7 +31,7 @@ from model import Inputdata
 ######################################
 from prediction import predictprice
 from cleaning_data import clean_immodata
-import pandas as pd
+#import pandas as pd
 from flask import Flask,render_template,request
 from datetime import datetime
 
@@ -40,7 +40,47 @@ from sklearn.linear_model import LinearRegression
 global actualmodel
 
 app = Flask(__name__)
- 
+
+@app.route('/customerview/',methods = ['POST', 'GET'])
+def customerview():
+    # Getting the current date and time
+    #dt = datetime.now()
+    # getting the timestamp
+    #ts = datetime.timestamp(dt)
+    print("$$$--",type(Model.model_storage),"---$$$")
+    modellist=[]
+    for mp in Model.model_storage:
+        print("===###",mp,Model.model_storage[mp],"====###")
+        modellist.append([mp,Model.model_storage[mp].filename])
+    print("===###",modellist,"###===")
+    
+    for m in modellist:
+        print(m,"@@",m[0],"@@",m[1])
+    #Model.model_storage.append([mname,self])
+
+    
+    return render_template('customerview.html',modellist=modellist) 
+
+@app.route('/customerview_select/',methods = ['POST', 'GET'])
+def customerview_select():
+    global actualmodel
+    # Getting the current date and time
+    #dt = datetime.now()
+    # getting the timestamp
+    #ts = datetime.timestamp(dt)
+    if request.method == 'GET':
+        pass
+        #message = "Please try to pass trough POST          "
+        #return message
+    if request.method == 'POST':
+        form_data = request.form
+        print("@@@@1@@",form_data,"@@1@@@")
+        mp=form_data['models']
+        actualmodel=Model.model_storage[mp]
+
+    
+    return render_template('predict.html') 
+
 @app.route('/',methods = ['POST', 'GET'])
 def alive():
     # Getting the current date and time
@@ -250,7 +290,7 @@ def model_load_selected():
         filename="./model/savedmodels/"+filename
         print("filename @@@@@@@@@@@",filename," @@@@@@@@@@@@@")
         #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
-        now_model=Defmodel(filename)
+        now_model=Model(filename)
         print("load$$$$$$$$$$$$$$")
         now_model.load()
         actualmodel=now_model
@@ -281,4 +321,4 @@ def model_load_selected():
         #return message
 '''
 
-#app.run(host='localhost', port=5000)
+app.run(host='localhost', port=5000)

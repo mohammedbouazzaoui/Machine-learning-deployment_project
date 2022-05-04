@@ -49,11 +49,50 @@ class Inputdata:
     def balance_data(self):
         pass
     
-class Defmodel:
+class Model():
+    model_storage={}   
+    def __init__(self, filename: str, model = []):
+        #print("inModel")
+        #super().__init__(filename, model)
+        self.model = model
+        self.filename = filename
+        #self.mdl=[]
+        mname="model"+str(len(Model.model_storage))
+        Model.model_storage[mname]=self
+        
+    def fit_model(self,X_train,y_train): #train the model
+        #print("5555@@@@@@@@@@@")
+        #self.mdl=self.model.fit(X_train,y_train)
+        self.model.fit(X_train,y_train)
+        #print("66665555@@@@@@@@@@@")
+    
+    def save(self):
+        #print("111$$$###@@@",self.filename)
+        pickle.dump(self.model, open(self.filename, 'wb'))
+        #print("2222$$$###@@@",self.filename)
+        
+    def load(self):
+        # Function : loads a model file
+        # load the model from disk
+        self.model = pickle.load(open(self.filename, 'rb'))
+        
+    def predict_model(self,X):
+        #ypred=self.mdl.predict(X)
+        ypred=self.model.predict(X)
+        return ypred       
+        
+    def test_model():
+        pass
+    def visu_model():
+        pass   
+class Defmodel2:
+    model_storage=[]
+
     def __init__(self,filename: str,  model = []):
         #print("inDefModel",model,filename)
         self.model = model
         self.filename = filename
+        Defmodel2.model_storage.append(self)
         
     def save(self):
         #print("111$$$###@@@",self.filename)
@@ -69,7 +108,8 @@ class Defmodel:
         ypred=self.model.predict(X)
         return ypred
 
-class Model(Defmodel):
+class Model2(Defmodel2):
+    
     def __init__(self, filename: str, model):
         #print("inModel")
         super().__init__(filename, model)
@@ -85,11 +125,18 @@ class Model(Defmodel):
         #print("66665555@@@@@@@@@@@")
     
     
-    def predict_model(self,X):
-        #ypred=self.mdl.predict(X)
-        ypred=self.model.predict(X)
-        return ypred
     
+    def save(self):
+        #print("111$$$###@@@",self.filename)
+        pickle.dump(self.model, open(self.filename, 'wb'))
+        #print("2222$$$###@@@",self.filename)
+        
+    def load(self):
+        # Function : loads a model file
+        # load the model from disk
+        self.model = pickle.load(open(self.filename, 'rb'))
+        
+        
     def test_model():
         pass
     def visu_model():
