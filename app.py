@@ -13,6 +13,12 @@ sys.path.append("./model")
 sys.path.append("./other")
 
 
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
 from model import Model
 #from model import Defmodel
 from model import Inputdata
@@ -40,8 +46,12 @@ DEBUG=True
         
 @app.route('/predict/', methods = ['POST', 'GET'])
 def predict():
-    debug(DEBUG,"predict")
     global actualmodel
+    
+    debug(DEBUG,"predict")
+    
+#    if request.method == 'GET':
+#        return error()
     
     columns=actualmodel.columns
 
@@ -51,8 +61,8 @@ def predict():
 def predict_show():
     debug(DEBUG,"predict_show")
     global actualmodel
-    if request.method == 'GET':
-        pass
+#    if request.method == 'GET':
+#       return error()
 
     if request.method == 'POST':
         form_data = request.form
@@ -64,10 +74,9 @@ def predict_show():
 @app.route('/customerview/',methods = ['POST', 'GET'])
 def customerview():
     debug(DEBUG,"customerview")
-    # Getting the current date and time
-    #dt = datetime.now()
-    # getting the timestamp
-    #ts = datetime.timestamp(dt)
+#    if request.method == 'GET':
+#        return error()
+    
     modellist=[]
     for mp in Model.model_storage:
         modellist.append([mp,Model.model_storage[mp].filename])
@@ -82,10 +91,8 @@ def customerview_select():
     #dt = datetime.now()
     # getting the timestamp
     #ts = datetime.timestamp(dt)
-    if request.method == 'GET':
-        pass
-        #message = "Please try to pass trough POST          "
-        #return message
+#    if request.method == 'GET':
+#        return error()
     if request.method == 'POST':
         form_data = request.form
         mp=form_data['models']
@@ -97,22 +104,14 @@ def customerview_select():
     #return render_template('predict.html') 
     #return render_template('customerview_select.html') 
 
-@app.route('/',methods = ['POST', 'GET'])
-def checkserver():
-    # Getting the current date and time
-    dt = datetime.now()
-    # getting the timestamp
-    ts = datetime.timestamp(dt)
-    
-    return render_template('checkserver.html',dt=dt,ts=ts)
+
 
 
 
 @app.route('/cleanup/', methods = ['POST', 'GET'])
 def cleanup():
-    #if request.method == 'GET':
-    #    message = "Please try to pass trough main form            "
-    #    return message
+#    if request.method == 'GET':
+#        return error()
     #if request.method == 'POST':
     #    pass
     #present some info about cleaning
@@ -122,9 +121,8 @@ def cleanup():
 
 @app.route('/cleanupinfo/', methods = ['POST', 'GET'])
 def cleanupinfo():
-    if request.method == 'GET':
-        message = "Please try to pass trough main form            "
-        return message
+#    if request.method == 'GET':
+#        return error()
     if request.method == 'POST':
         pass
 
@@ -134,8 +132,11 @@ def cleanupinfo():
 @app.route('/webscraper/', methods = ['POST', 'GET'])
 def webscraper():
     return render_template('webscraper.html')
+
 @app.route('/webscraper_run/', methods = ['POST', 'GET'])
 def webscraperrun():
+#    if request.method == 'GET':
+#        return error()
     #start scraper
     #NOT USED FOR NOW
     #scraper()
@@ -148,8 +149,8 @@ def webscraperrun():
 
 @app.route('/model_create/', methods = ['POST', 'GET'])
 def model_create():
-    #if request.method == 'GET':
-    #    pass
+#    if request.method == 'GET':
+#       return error()
     
     return render_template('model_create.html')
 
@@ -159,8 +160,8 @@ def model_create_selected():
     inpdata=Inputdata("./data/data_homes_cleaned.csv")
     inpdata.prepare()
 
-    if request.method == 'GET':
-        pass
+#    if request.method == 'GET':
+#        return error()
     
     if request.method == 'POST':
 
@@ -173,15 +174,19 @@ def model_create_selected():
         selected_model=form_data['selected_model']
         filename="./model/savedmodels/"+selected_model+str(ts)+".model"
 
-        if selected_model == 'linearregression':
-
-
+        if selected_model == 'linearregression_prev':
             #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
             now_model=Model(filename,LinearRegression())
             now_model.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
             now_model.save()
             actualmodel=now_model
-
+            
+        if selected_model == 'linearregression':
+            #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
+            now_model=Model(filename,make_pipeline(StandardScaler(), LogisticRegression()))
+            now_model.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
+            now_model.save()
+            actualmodel=now_model
 
     info=actualmodel.filename
     score=actualmodel.accuracy_score
@@ -197,8 +202,8 @@ def model_load():
 def model_load_selected():
     global actualmodel
 
-    if request.method == 'GET':
-        pass
+#    if request.method == 'GET':
+#        return error()
     
     if request.method == 'POST':
 
@@ -210,16 +215,18 @@ def model_load_selected():
         now_model.load()
         actualmodel=now_model
 
-
     info=actualmodel.filename
     score=actualmodel.accuracy_score
     return render_template('main.html',info=info,score=score)
 
-@app.route('/main/',methods = ['POST', 'GET'])
+@app.route('/main/',methods = ['POST','GET'])
 def main():
     debug(DEBUG,"def main")
     global actualmodel
-    if 'firstpass' not in locals():
+    global firstpass
+    #if 'firstpass' not in globals():
+    if firstpass:
+        debug(DEBUG,"main firstpass")
         #load customer model
         actualmodel=Model('./model/savedmodels/linearregressionCUSTOMER.model')
         actualmodel.load()
@@ -229,25 +236,35 @@ def main():
     
         firstpass=False
     
-        
-    if request.method == 'GET':
-        pass
-        #message = "Please try to pass trough POST          "
-        #return message
-    if request.method == 'POST':
-        pass
+#    if request.method == 'GET':
+#        return error()
     
+    #if request.method == 'POST':
     form_data = request.form
     info=actualmodel.filename
     score=actualmodel.accuracy_score
     return render_template('main.html',info=info,score=score)
+    
+@app.route('/',methods = ['POST', 'GET'])
+def checkserver():
+    # Getting the current date and time
+    dt = datetime.now()
+    # getting the timestamp
+    ts = datetime.timestamp(dt)
+    
+    return render_template('checkserver.html',dt=dt,ts=ts)   
+#def error():
+#    debug(DEBUG,"error()")
+    return render_template('error.html',error="Only access trough the root possible (/)")
+    
 #######################################
 # MAIN
 #######################################
 
 debug(DEBUG,"before main")
-main
+global firstpass
+firstpass=True
 debug(DEBUG,"after main")
 
 
-#app.run(host='localhost', port=5000)
+app.run(host='localhost', port=5000)

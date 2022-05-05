@@ -49,11 +49,6 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
 
     df=pd.read_csv(inputfile,delimiter=",")
     
-    #MAIN
-
-    inputfile = "./data/data_homes.csv"
-    df=pd.read_csv(inputfile,delimiter=",")
-    
     
     # Cleaning steps
     ################
@@ -66,14 +61,14 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
                 'Unnamed: 0','user.personal.language','user.id',\
                 'customer.name','customer.family']
     df = df.drop(columns=dropcolmns)
-    #df.isna().sum()
-    #print(df.shape)
+    df.isna().sum()
+    print(df.shape)
     #drop duplicates
     df=df.drop_duplicates()
-    #print(df.shape)
-    #df.head()
+    print(df.shape)
+    df.head()
     
-    # drop rows "fromprice - toprice" these are 'housegroups'
+    # drop "fromprice - toprice" these are 'housegroups'
     df=df[df['classified.price'].str.find('-') == -1]
     # drop bad rows
     df=df[df['classified.kitchen.type'] != 'classified.kitchen.type']
@@ -81,11 +76,10 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     df=df[df['classified.price'] != 'no price']
     
     # get ordinals and categoricals
-    '''
     for i in df.columns:
         if len(df[i].unique()) < 100 :
             print(i,": ",len(df[i].unique()),df[i].unique())
-    '''        
+            
     # transformm ordinals and categoricals        
     #categoricals
     #############
@@ -148,30 +142,63 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
         df[fld]=df[fld].replace(np.nan, 0)
         df[fld]=df[fld].replace('false', 0)
         df[fld]=df[fld].replace('true', 1)
-    #print(df.columns)    
+    print(df.columns)    
     
-    #print('###########################################################')
+    print('###########################################################')
     # get the nan field of a column
     #df[df['classified.land.surface'].isna() == True]
     #df['classified.land.surface']=df['classified.land.surface'].replace(np.nan,9999)
+        
     
-    df.head(20)
+    
+    # drop all rows with nan
     df=df.dropna()
-    #df.info()
-    df['classified.building.constructionYear'].unique()
     
-    df['classified.price'] = df['classified.price'].astype(float)
-    df['classified.building.constructionYear'] = df['classified.building.constructionYear'].astype(float)
-    df['classified.certificates.primaryEnergyConsumptionLevel'] = df['classified.certificates.primaryEnergyConsumptionLevel'].astype(float)
+    # change type
+    df['classified.price'] = df['classified.price'].astype(np.float)
+    df['classified.building.constructionYear'] = df['classified.building.constructionYear'].astype(np.float)
+    df['classified.certificates.primaryEnergyConsumptionLevel'] = df['classified.certificates.primaryEnergyConsumptionLevel'].astype(np.float)
     df['classified.bedroom.count'] = df['classified.bedroom.count'].astype(np.int64)
-    df['classified.land.surface'] = df['classified.land.surface'].astype(float)
-    df['classified.outdoor.garden.surface'] = df['classified.outdoor.garden.surface'].astype(float)
+    df['classified.land.surface'] = df['classified.land.surface'].astype(np.float)
+    df['classified.outdoor.garden.surface'] = df['classified.outdoor.garden.surface'].astype(np.float)
     df['classified.parking.parkingSpaceCount.indoor'] = df['classified.parking.parkingSpaceCount.indoor'].astype(np.int64)
     df['classified.parking.parkingSpaceCount.outdoor'] = df['classified.parking.parkingSpaceCount.outdoor'].astype(np.int64)
+    
     dum=pd.get_dummies(df['classified.energy.heatingType'])
     df=df.join(dum)
     df=df.drop(columns=['classified.energy.heatingType'])
+    #
     df=df.drop(columns=['classified.subtype'])
+    #
+    ########################################################
+    # leave only needed columns
+    ########################################################
+    #
+    '''
+    # all available fields:
+    Index(['classified.price', 'classified.kitchen.type',
+       'classified.building.constructionYear', 'classified.building.condition',
+       'classified.certificates.primaryEnergyConsumptionLevel',
+       'classified.bedroom.count', 'classified.land.surface',
+       'classified.atticExists', 'classified.basementExists',
+       'classified.outdoor.garden.surface',
+       'classified.outdoor.terrace.exists',
+       'classified.specificities.SME.office.exists',
+       'classified.wellnessEquipment.hasSwimmingPool',
+       'classified.parking.parkingSpaceCount.indoor',
+       'classified.parking.parkingSpaceCount.outdoor', 'carbon', 'electric',
+       'fueloil', 'gas', 'pellet', 'wood'],
+      dtype='object')
+    '''
+    select_columns=['classified.price','classified.building.constructionYear', 'classified.building.condition',
+       'classified.certificates.primaryEnergyConsumptionLevel',
+       'classified.bedroom.count', 'classified.land.surface',
+       'classified.outdoor.garden.surface']
+    df=df[select_columns]
+    #
     # Save cleaned data for model
-    df.to_csv("./data/data_homes_cleaned.csv",index=False) 
+    df.to_csv(cleaned_file,index=False)
+    #df.to_csv("../data/data_homes_cleaned.csv",index=False)
 
+#print("TESTINGG####")
+#clean_immodata("../data/data_homes.csv","../data/data_homes_cleaned.csv")
