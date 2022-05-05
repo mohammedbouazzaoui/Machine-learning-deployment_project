@@ -98,7 +98,7 @@ def customerview_select():
     #return render_template('customerview_select.html') 
 
 @app.route('/',methods = ['POST', 'GET'])
-def alive():
+def checkserver():
     # Getting the current date and time
     dt = datetime.now()
     # getting the timestamp
@@ -106,32 +106,7 @@ def alive():
     
     return render_template('checkserver.html',dt=dt,ts=ts)
 
-@app.route('/main/',methods = ['POST', 'GET'])
-def main():
-    debug(DEBUG,"def main")
-    global actualmodel
-    if 'firstpass' not in locals():
-        #load customer model
-        actualmodel=Model('./model/savedmodels/linearregressionCUSTOMER.model')
-        actualmodel.load()
-        inpdata=Inputdata("./data/data_homes_cleaned.csv")
-        inpdata.prepare()
-        actualmodel.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
-    
-        firstpass=False
-    
-        
-    if request.method == 'GET':
-        pass
-        #message = "Please try to pass trough POST          "
-        #return message
-    if request.method == 'POST':
-        pass
-    
-    form_data = request.form
-    info=actualmodel.filename
-    score=actualmodel.accuracy_score
-    return render_template('main.html',info=info,score=score)
+
 
 @app.route('/cleanup/', methods = ['POST', 'GET'])
 def cleanup():
@@ -240,6 +215,32 @@ def model_load_selected():
     score=actualmodel.accuracy_score
     return render_template('main.html',info=info,score=score)
 
+@app.route('/main/',methods = ['POST', 'GET'])
+def main():
+    debug(DEBUG,"def main")
+    global actualmodel
+    if 'firstpass' not in locals():
+        #load customer model
+        actualmodel=Model('./model/savedmodels/linearregressionCUSTOMER.model')
+        actualmodel.load()
+        inpdata=Inputdata("./data/data_homes_cleaned.csv")
+        inpdata.prepare()
+        actualmodel.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
+    
+        firstpass=False
+    
+        
+    if request.method == 'GET':
+        pass
+        #message = "Please try to pass trough POST          "
+        #return message
+    if request.method == 'POST':
+        pass
+    
+    form_data = request.form
+    info=actualmodel.filename
+    score=actualmodel.accuracy_score
+    return render_template('main.html',info=info,score=score)
 #######################################
 # MAIN
 #######################################
@@ -249,4 +250,4 @@ main
 debug(DEBUG,"after main")
 
 
-app.run(host='localhost', port=5000)
+#app.run(host='localhost', port=5000)
