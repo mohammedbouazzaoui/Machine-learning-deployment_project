@@ -23,22 +23,22 @@ new house's data as input and return those data preprocessed as output.
 - If your data doesn't contain the required information, you should return an 
 error to the user.
 """
+import sys
+sys.path.append(".")
+sys.path.append("./predict")
+sys.path.append("./preprocessing")
+sys.path.append("./model")
+sys.path.append("./other")
+
+from myfunctions import debug
+
 import pandas as pd
 import numpy as np
-#import pandas as pd
-#inputfile = "../data/data_homes.csv"
-#inputfile = "C:/Users/bmadmin/Desktop/Octocat/mohammedbouazzaoui/
-#challenge-machine-learning-api-deployment/data/data_homes.csv"
-# some abstraction
 
+DEBUG=True
 
 def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "../data/data_homes_cleaned.csv"):
-    print("@@@@@@@@@@@@@@@@@@@@@@@in cleandat 2",inputfile,cleaned_file,"@@@@@@@@@@@@@@@@@@@@@@@@@")
-    #import numpy as np
-    #import pandas as pd
-    #inputfile = "../data/data_homes.csv"
-    #inputfile = "C:/Users/bmadmin/Desktop/Octocat/mohammedbouazzaoui/challenge-machine-learning-api-deployment/data/data_homes.csv"
-    # some abstraction
+    debug(DEBUG,"clean_immodata")
 
     #
     # function : will clean the immoweb data containing all the houses
@@ -169,6 +169,33 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     df=df.drop(columns=['classified.energy.heatingType'])
     #
     df=df.drop(columns=['classified.subtype'])
+    #
+    ########################################################
+    # leave only needed columns
+    ########################################################
+    #
+    '''
+    # all available fields:
+    Index(['classified.price', 'classified.kitchen.type',
+       'classified.building.constructionYear', 'classified.building.condition',
+       'classified.certificates.primaryEnergyConsumptionLevel',
+       'classified.bedroom.count', 'classified.land.surface',
+       'classified.atticExists', 'classified.basementExists',
+       'classified.outdoor.garden.surface',
+       'classified.outdoor.terrace.exists',
+       'classified.specificities.SME.office.exists',
+       'classified.wellnessEquipment.hasSwimmingPool',
+       'classified.parking.parkingSpaceCount.indoor',
+       'classified.parking.parkingSpaceCount.outdoor', 'carbon', 'electric',
+       'fueloil', 'gas', 'pellet', 'wood'],
+      dtype='object')
+    '''
+    select_columns=['classified.price','classified.building.constructionYear', 'classified.building.condition',
+       'classified.certificates.primaryEnergyConsumptionLevel',
+       'classified.bedroom.count', 'classified.land.surface',
+       'classified.outdoor.garden.surface']
+    df=df[select_columns]
+    #
     # Save cleaned data for model
     df.to_csv(cleaned_file,index=False)
     #df.to_csv("../data/data_homes_cleaned.csv",index=False)

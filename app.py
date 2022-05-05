@@ -20,11 +20,13 @@ sys.path.append(".")
 sys.path.append("./predict")
 sys.path.append("./preprocessing")
 sys.path.append("./model")
+sys.path.append("./other")
 
 
 from model import Model
 #from model import Defmodel
 from model import Inputdata
+from myfunctions import debug
 
 #NOT USED FOR NOW
 #from webscraper import scraper
@@ -39,72 +41,52 @@ from datetime import datetime
 from sklearn.linear_model import LinearRegression
 global actualmodel
 
+
+
+
 app = Flask(__name__)
 
-
+DEBUG=True
+        
 @app.route('/predict/', methods = ['POST', 'GET'])
 def predict():
+    debug(DEBUG,"predict")
     global actualmodel
-    print("--------------------------------------------------")
-    columns=actualmodel.columns
     
-    print("111$$$$$$$$$$$$$$",columns)
+    columns=actualmodel.columns
+
     return render_template('predict.html',columns=columns)
 
 @app.route('/predict_show/', methods = ['POST', 'GET'])
 def predict_show():
+    debug(DEBUG,"predict_show")
     global actualmodel
     if request.method == 'GET':
         pass
 
     if request.method == 'POST':
         form_data = request.form
-        print("we#@@@@@@@@@@@",form_data)
-
         house_json=dict(form_data)
-
-        #gardensurface=form_data['gardensurface']
-        #constructionYear=form_data['constructionYear']
-        #house_json={"constructionYear": constructionYear,
-        #             "gardensurface":gardensurface}
-               
-        print("in predict_show")
-        print("@@@@",house_json)
-        #X=house_json
-        #X=[house_json['constructionYear'],house_json['gardensurface']]
-        #print("@@@@$$$$$$$$$$$$",X)
-        #X=pd.DataFrame(X)
-        #prediction_price=predictprice(actualmodel,house_json)
-        #actualmodel=[]
         prediction_price=predictprice(actualmodel.model,house_json)
-        print("afterpredict############",prediction_price)
-        #prediction_price=actualmodel.predict_model(X)
-
-        #print("############",prediction_price)
-        #return render_template('predict.html',prediction_price=prediction_price,house_json=house_json)
         return render_template('predict_show.html',prediction_price=prediction_price,house_json=house_json)
 
 
 @app.route('/customerview/',methods = ['POST', 'GET'])
 def customerview():
+    debug(DEBUG,"customerview")
     # Getting the current date and time
     #dt = datetime.now()
     # getting the timestamp
     #ts = datetime.timestamp(dt)
-    print("$$$--",type(Model.model_storage),"---$$$")
     modellist=[]
     for mp in Model.model_storage:
-        print("===###",mp,Model.model_storage[mp],"====###")
         modellist.append([mp,Model.model_storage[mp].filename])
-    print("===###",modellist,"###===")
-    
-    for m in modellist:
-        print(m,"@@",m[0],"@@",m[1])
-    #Model.model_storage.append([mname,self])
+
     return render_template('customerview.html',modellist=modellist) 
 
 @app.route('/customerview_select/',methods = ['POST', 'GET'])
 def customerview_select():
+    debug(DEBUG,"customerview_select")
     global actualmodel
     # Getting the current date and time
     #dt = datetime.now()
@@ -116,12 +98,14 @@ def customerview_select():
         #return message
     if request.method == 'POST':
         form_data = request.form
-        print("@@@@1@@",form_data,"@@1@@@")
         mp=form_data['models']
         actualmodel=Model.model_storage[mp]
+        
+    columns=actualmodel.columns
 
+    return render_template('predict.html',columns=columns)
     #return render_template('predict.html') 
-    return render_template('customer_view.html') 
+    #return render_template('customerview_select.html') 
 
 @app.route('/',methods = ['POST', 'GET'])
 def alive():
@@ -130,20 +114,19 @@ def alive():
     # getting the timestamp
     ts = datetime.timestamp(dt)
     
-    return render_template('alive.html',dt=dt,ts=ts)
+    return render_template('checkserver.html',dt=dt,ts=ts)
 
 @app.route('/main/',methods = ['POST', 'GET'])
 def main():
+    debug(DEBUG,"def main")
     global actualmodel
     if 'firstpass' not in locals():
         #load customer model
         actualmodel=Model('./model/savedmodels/linearregressionCUSTOMER.model')
-        print("$$$Customer model loaded")
         actualmodel.load()
         inpdata=Inputdata("./data/data_homes_cleaned.csv")
         inpdata.prepare()
         actualmodel.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
-        print("111$$$$$$$$$$$$$$")
     
         firstpass=False
     
@@ -156,7 +139,6 @@ def main():
         pass
     
     form_data = request.form
-    print("@@@$$$",form_data,actualmodel.accuracy_score, actualmodel.filename)
     info=actualmodel.filename
     score=actualmodel.accuracy_score
     return render_template('main.html',info=info,score=score)
@@ -168,9 +150,6 @@ def cleanup():
     #    return message
     #if request.method == 'POST':
     #    pass
-        #form_data = request.form
-        #print("we#@@@@@@@@@@@",form_data)
-        #print("***********")
     #present some info about cleaning
     #run cleaning
     clean_immodata("./data/data_homes.csv","./data/data_homes_cleaned.csv")
@@ -183,54 +162,9 @@ def cleanupinfo():
         return message
     if request.method == 'POST':
         pass
-        #form_data = request.form
-        #print("we#@@@@@@@@@@@",form_data)
-        #print("***********")
-    #HERE INFO ON CLEANUP !!!!!!!!!!!!!!!!
-    #present some info about cleaning
-    #run cleaning
-    #clean_immodata2("./data/data_homes.csv","./data/data_homes_cleaned.csv")
-    
-    #print("@@@@@@@22@@@@@@@@@@")
-    #return f
+
     return render_template('cleanupinfo.html')
 
-
- 
-@app.route('/predict_NOTUSED/', methods = ['POST', 'GET'])
-def data():
-    if request.method == 'GET':
-        message = "Please try to pass a json like :\
-               json\
-            {\
-              \"data\": {\
-                \"area\": int,\
-                \"property-type\": \"APARTMENT\" | \"HOUSE\" | \"OTHERS\",\
-                \"rooms-number\": int,\
-                \"zip-code\": int,\
-                    ...\
-                    ...\
-              }\
-            }\
-            "
-        return message
-    if request.method == 'POST':
-        form_data = request.form
-        #print("we#@@@@@@@@@@@",form_data)
-
-    
-
-        gardensurface=form_data['gardensurface']
-        constructionYear=form_data['constructionYear']
-        house_json={"data": 
-                    {"constructionYear": constructionYear,
-                     "gardensurface":gardensurface}
-                    }
-        
-        
-        prediction_price=predictprice(house_json)
-        #print("############",prediction_price)
-        return render_template('predict.html',prediction_price=prediction_price,house_json=house_json)
 
 @app.route('/webscraper/', methods = ['POST', 'GET'])
 def webscraper():
@@ -259,7 +193,7 @@ def model_create_selected():
     global actualmodel
     inpdata=Inputdata("./data/data_homes_cleaned.csv")
     inpdata.prepare()
-    print("in create model")
+
     if request.method == 'GET':
         pass
     
@@ -273,20 +207,16 @@ def model_create_selected():
         form_data = request.form
         selected_model=form_data['selected_model']
         filename="./model/savedmodels/"+selected_model+str(ts)+".model"
-        print("wesdfsdf#@@@@@@@@@@@",form_data['selected_model'])
+
         if selected_model == 'linearregression':
 
-            print("w#####df#@@@@@@@@@@@",form_data['selected_model'])
+
             #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
             now_model=Model(filename,LinearRegression())
-            print("$$$$$$$$$$$$$$")
             now_model.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
-            print("111$$$$$$$$$$$$$$")
             now_model.save()
             actualmodel=now_model
-            
-            print("222$$$$$$$$$$$$$$")
-        #return render_template('main.html')
+
 
     info=actualmodel.filename
     score=actualmodel.accuracy_score
@@ -301,22 +231,20 @@ def model_load():
 @app.route('/model_load_selected/', methods = ['POST', 'GET'])
 def model_load_selected():
     global actualmodel
-    print("in load_model")
+
     if request.method == 'GET':
         pass
     
     if request.method == 'POST':
-        print("load POST")
+
         form_data = request.form   # get model filename
         filename=form_data['myfile']
         filename="./model/savedmodels/"+filename
-        print("filename @@@@@@@@@@@",filename," @@@@@@@@@@@@@")
-        #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
+
         now_model=Model(filename)
-        print("load$$$$$$$$$$$$$$")
         now_model.load()
         actualmodel=now_model
-        print("MODEL LOADED",filename)
+
 
     info=actualmodel.filename
     score=actualmodel.accuracy_score
@@ -325,25 +253,8 @@ def model_load_selected():
 #######################################
 # MAIN
 #######################################
-main
-#clean_immodata("./data/data_homes.csv","./data/data_homes_cleaned.csv")
-'''  
-    if request.method == 'GET':
-        pass
-        message = "Please try to pass a json like :\
-               json\
-            {\
-              \"data\": {\
-                \"area\": int,\
-                \"property-type\": \"APARTMENT\" | \"HOUSE\" | \"OTHERS\",\
-                \"rooms-number\": int,\
-                \"zip-code\": int,\
-                    ...\
-                    ...\
-              }\
-            }\
-            "
-        #return message
-'''
 
+debug(DEBUG,"before main")
+main
+debug(DEBUG,"after main")
 app.run(host='localhost', port=5000)
