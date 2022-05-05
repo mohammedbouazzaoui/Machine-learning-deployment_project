@@ -100,8 +100,10 @@ def predictprice(model,house_json):
                 
     '''
          
-    Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
-    ycol=['classified.price']
+    #Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
+    #ycol=['classified.price']
+    #Xcol=house_json.keys()
+    #ycol=house_json.values()
     #Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
     
     #df=df[['classified.zip','classified.price','classified.building.constructionYear']]
@@ -129,11 +131,12 @@ def predictprice(model,house_json):
     #Xcol=['classified.building.constructionYear','classified.outdoor.garden.surface']
     #ycol=['classified.price']
     #Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
-    data=[house_json['constructionYear'],house_json['gardensurface']]
-    print("###@@@$$$",data,Xcol)
-    X=pd.DataFrame([data],columns=Xcol)
-    print("@@@@@X@@@@",X)
+    #data=[house_json['constructionYear'],house_json['gardensurface']]
+    #print("###@@@$$$",data,Xcol)
+    #X=pd.DataFrame([data],columns=Xcol)
+    X=pd.DataFrame([house_json])
+    print("before predict@@@@@X@@@@",X)
     result=model.predict(X)
 
-    print("@@@@@@@@@@@@@@",result)
+    print("afterpredict@@@@@@@@@@@@@@",result)
     return result

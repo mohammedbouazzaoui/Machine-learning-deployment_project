@@ -16,28 +16,28 @@ class Inputdata:
         self.datafile=datafile
         self.yname='classified.price'
         self.Xy=[]
+        self.X=[]
+        self.y=[]
         self.X_train=[]
         self.X_test=[]
         self.y_train=[]
         self.y_test = []
         self.random_state = 42
         self.train_size = 0.80
+        
+        
     def prepare(self):
         self.read_csv()
         self.split_data()
-        
-        
+           
     def read_csv(self):
         self.Xy=pd.read_csv(self.datafile)
         
 
-        Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
+        #Xycol=['classified.building.constructionYear','classified.outdoor.garden.surface','classified.price']
         
-        #df=df[['classified.zip','classified.price','classified.building.constructionYear']]
-        self.Xy=self.Xy[Xycol]
-        
+        #self.Xy=self.Xy[Xycol]
 
-        
     def split_data(self):
         #print("$$$$$$$$$$$$$$$$$$$$",self.Xy.columns)
         self.X=self.Xy.drop(columns=[self.yname])
@@ -56,15 +56,19 @@ class Model():
         #super().__init__(filename, model)
         self.model = model
         self.filename = filename
-        #self.mdl=[]
+        self.regressor=[]
+        self.accuracy_score =[]
         mname="model"+str(len(Model.model_storage))
         Model.model_storage[mname]=self
+        self.columns=[]
         
-    def fit_model(self,X_train,y_train): #train the model
+    def fit_model(self,X_train,y_train,X_test,y_test): #train the model
         #print("5555@@@@@@@@@@@")
         #self.mdl=self.model.fit(X_train,y_train)
-        self.model.fit(X_train,y_train)
-        #print("66665555@@@@@@@@@@@")
+        self.regressor=self.model.fit(X_train,y_train)
+        self.accuracy_score=self.regressor.score(X_test,y_test)
+        self.columns=X_train.columns
+        print("66665555@@",self.accuracy_score,"@@@@@@@@@")
     
     def save(self):
         #print("111$$$###@@@",self.filename)
@@ -74,6 +78,7 @@ class Model():
     def load(self):
         # Function : loads a model file
         # load the model from disk
+        print('IN LOAD',self.filename)
         self.model = pickle.load(open(self.filename, 'rb'))
         
     def predict_model(self,X):
@@ -85,59 +90,4 @@ class Model():
         pass
     def visu_model():
         pass   
-class Defmodel2:
-    model_storage=[]
 
-    def __init__(self,filename: str,  model = []):
-        #print("inDefModel",model,filename)
-        self.model = model
-        self.filename = filename
-        Defmodel2.model_storage.append(self)
-        
-    def save(self):
-        #print("111$$$###@@@",self.filename)
-        pickle.dump(self.model, open(self.filename, 'wb'))
-        #print("2222$$$###@@@",self.filename)
-        
-    def load(self):
-        # Function : loads a model file
-        # load the model from disk
-        self.model = pickle.load(open(self.filename, 'rb'))
-    def predict_model(self,X):
-        #ypred=self.mdl.predict(X)
-        ypred=self.model.predict(X)
-        return ypred
-
-class Model2(Defmodel2):
-    
-    def __init__(self, filename: str, model):
-        #print("inModel")
-        super().__init__(filename, model)
-        self.model = model
-        self.filename = filename
-        #self.mdl=[]
-        
-        
-    def fit_model(self,X_train,y_train): #train the model
-        #print("5555@@@@@@@@@@@")
-        #self.mdl=self.model.fit(X_train,y_train)
-        self.model.fit(X_train,y_train)
-        #print("66665555@@@@@@@@@@@")
-    
-    
-    
-    def save(self):
-        #print("111$$$###@@@",self.filename)
-        pickle.dump(self.model, open(self.filename, 'wb'))
-        #print("2222$$$###@@@",self.filename)
-        
-    def load(self):
-        # Function : loads a model file
-        # load the model from disk
-        self.model = pickle.load(open(self.filename, 'rb'))
-        
-        
-    def test_model():
-        pass
-    def visu_model():
-        pass

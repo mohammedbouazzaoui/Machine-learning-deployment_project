@@ -4,14 +4,22 @@
 {% include 'navigator.html' %}
 
 {% endblock %}
-<!DOCTYPE html>
+
 <html>
 <body>
 <form action="/predict_show/" method = "POST">
-<p>Construction Year <input type = "text" name = "constructionYear" /></p>
-<p>Garden Surface <input type = "text" name = "gardensurface" /></p>
-<p><input type = "submit" value = "Submit" /></p>
+       {% for m in columns %}
+                <tr>
+                <p> {{m}} <input type = "text" name = "{{m}}" /></p>
+            
+                </tr>
+        {% endfor %}
+  
+
+<br><br>
+<input type="submit" value="Submit">
 </form>
 </body>
 </html>
+
 
