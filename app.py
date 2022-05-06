@@ -127,8 +127,8 @@ def model_create_selected():
             now_model.save()
             actualmodel=now_model
 
-    info=actualmodel.filename
-    score=actualmodel.accuracy_score
+            info=actualmodel.filename
+            score=actualmodel.accuracy_score
     return render_template('main.html',info=info,score=score)
 
 

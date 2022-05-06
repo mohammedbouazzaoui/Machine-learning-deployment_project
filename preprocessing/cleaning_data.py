@@ -31,7 +31,7 @@ def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = ".
     # Cleaning steps
     ################
     # Checking how many rows of each attribute are NaN
-    df.isna().sum()
+    #df.isna().sum()
     
     # drop columns
     dropcolmns=['classified.type','classified.condition.isNewlyBuilt','classified.transactionType','customer.id','classified.visualisationOption','classified.id','screen.language','screen.name','customer.networkInfo.id','customer.networkInfo.name',\
@@ -40,7 +40,7 @@ def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = ".
                 'customer.name','customer.family']
     df = df.drop(columns=dropcolmns)
     df=df.drop_duplicates()
-    
+    debug(DEBUG,"2clean_immodata")
     # drop rows "fromprice - toprice" these are 'housegroups'
     df=df[df['classified.price'].str.find('-') == -1]
     # drop bad rows
@@ -63,7 +63,7 @@ def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = ".
     df['classified.building.condition'] = df['classified.building.condition'].replace('good',5)
     df['classified.building.condition'] = df['classified.building.condition'].replace('just renovated',6)
     df['classified.building.condition'] = df['classified.building.condition'].replace('as new',7)
-    
+    debug(DEBUG,"3clean_immodata")
     # set 0
     ################
     #----------- replace nan/None
@@ -91,7 +91,7 @@ def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = ".
         df[fld]=df[fld].replace('true', 1)
 
     df=df.dropna()
-
+    debug(DEBUG,"4clean_immodata")
     #change type
     df['classified.price'] = df['classified.price'].astype(float)
     df['classified.building.constructionYear'] = df['classified.building.constructionYear'].astype(float)
@@ -105,7 +105,7 @@ def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = ".
     df=df.join(dum)
     df=df.drop(columns=['classified.energy.heatingType'])
     df=df.drop(columns=['classified.subtype'])
+    debug(DEBUG,"5clean_immodata")
 
-    debug(DEBUG,df.info())
     df.to_csv("./data/data_homes_cleaned.csv",index=False) 
 
