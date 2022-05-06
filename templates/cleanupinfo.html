@@ -4,8 +4,42 @@
 
 {% endblock %}
 
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.container {
+  position: relative;
+}
 
-<form action="/main/" method = "POST">
-<p>    PRESENT INFO ABOUT CLEANING press to go to main</p>
-<p><input type = "submit" value = "Submit" /></p>
-</form>
+.center {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+</style>
+</head>
+<body>
+
+
+
+<div class="container">
+
+  <div class="center">
+  <form action="/main/" method = "POST">
+  <h2></h2>
+  <h2></h2>
+  <h2></h2>
+  <h1>Clean up and prepare data</h1>
+  <h1>_________________________</h1>
+  <h3></h3>
+  <p><input type = "submit" value = "Clean data" /></p>
+  </form>
+  </div>
+</div>
+
+</body>
+</html>

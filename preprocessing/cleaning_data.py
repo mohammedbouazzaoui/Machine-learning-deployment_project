@@ -23,21 +23,34 @@ new house's data as input and return those data preprocessed as output.
 - If your data doesn't contain the required information, you should return an 
 error to the user.
 """
+'''
 import sys
-sys.path.append(".")
-sys.path.append("./predict")
-sys.path.append("./preprocessing")
-sys.path.append("./model")
-sys.path.append("./other")
 
-from myfunctions import debug
+if "./predict" not in sys.path:
+    sys.path.append("./predict")
+if "./preprocessing" not in sys.path:
+    sys.path.append("./preprocessing")
+if "./model" not in sys.path:
+    sys.path.append("./model")
+if "./other" not in sys.path:
+    sys.path.append("./other")
+
+
+import sys
+
+if "." not in sys.path:
+    sys.path.append(".")
+
+'''
+
+from other.myfunctions import debug
 
 import pandas as pd
 import numpy as np
 
 DEBUG=True
 
-def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "../data/data_homes_cleaned.csv"):
+def clean_immodata(inputfile:str = "./data/data_homes.csv",cleaned_file:str = "./data/data_homes_cleaned.csv"):
     debug(DEBUG,"clean_immodata")
 
     #
@@ -51,9 +64,8 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     
     #MAIN
 
-    inputfile = "./data/data_homes.csv"
+    #inputfile = "./data/data_homes.csv"
     df=pd.read_csv(inputfile,delimiter=",")
-    
     
     # Cleaning steps
     ################
@@ -121,8 +133,6 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     df['classified.building.condition'] = df['classified.building.condition'].replace('just renovated',6)
     df['classified.building.condition'] = df['classified.building.condition'].replace('as new',7)
     
-    
-    
     # set 0
     ################
     #----------- replace nan/None
@@ -154,12 +164,11 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     # get the nan field of a column
     #df[df['classified.land.surface'].isna() == True]
     #df['classified.land.surface']=df['classified.land.surface'].replace(np.nan,9999)
-    
-    df.head(20)
     df=df.dropna()
+    #df.head(20)
     #df.info()
-    df['classified.building.constructionYear'].unique()
-    
+    #df['classified.building.constructionYear'].unique()
+    #change type
     df['classified.price'] = df['classified.price'].astype(float)
     df['classified.building.constructionYear'] = df['classified.building.constructionYear'].astype(float)
     df['classified.certificates.primaryEnergyConsumptionLevel'] = df['classified.certificates.primaryEnergyConsumptionLevel'].astype(float)
@@ -172,6 +181,13 @@ def clean_immodata(inputfile:str = "../data/data_homes.csv",cleaned_file:str = "
     df=df.join(dum)
     df=df.drop(columns=['classified.energy.heatingType'])
     df=df.drop(columns=['classified.subtype'])
+    '''
     # Save cleaned data for model
+    df=df[['classified.price', 'classified.kitchen.type',
+       'classified.building.constructionYear', 'classified.building.condition',
+       'classified.certificates.primaryEnergyConsumptionLevel',
+       'classified.bedroom.count']]
+    '''
+    debug(DEBUG,df.info())
     df.to_csv("./data/data_homes_cleaned.csv",index=False) 
 

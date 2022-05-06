@@ -5,13 +5,27 @@ Created on Thu Apr 28 09:17:15 2022
 @author: bmadmin
 
 """
+'''
 import sys
-sys.path.append(".")
-sys.path.append("./predict")
-sys.path.append("./preprocessing")
-sys.path.append("./model")
-sys.path.append("./other")
 
+ 
+does not work also with /  ????????????????
+if ".\predict" not in sys.path:
+    sys.path.append(".\predict")
+if ".\preprocessing" not in sys.path:
+    sys.path.append(".\preprocessing")
+if ".\model" not in sys.path:
+    sys.path.append(".\model")
+if ".\other" not in sys.path:
+    sys.path.append(".\other")
+''' 
+
+
+
+from model.model import Model
+#from model import Defmodel
+from model.model import Inputdata
+from other.myfunctions import debug
 
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
@@ -19,16 +33,15 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
-from model import Model
-#from model import Defmodel
-from model import Inputdata
-from myfunctions import debug
+from sklearn.neural_network import MLPRegressor
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
 
 #NOT USED FOR NOW
 #from webscraper import scraper
 ######################################
-from prediction import predictprice
-from cleaning_data import clean_immodata
+from predict.prediction import predictprice
+from preprocessing.cleaning_data import clean_immodata
 #import pandas as pd
 from flask import Flask,render_template,request
 from datetime import datetime
@@ -65,8 +78,10 @@ def predict_show():
 #       return error()
 
     if request.method == 'POST':
+        debug(DEBUG,"in request.method")
         form_data = request.form
         house_json=dict(form_data)
+        debug(DEBUG,house_json)
         prediction_price=predictprice(actualmodel.model,house_json)
         return render_template('predict_show.html',prediction_price=prediction_price,house_json=house_json)
 
@@ -104,10 +119,6 @@ def customerview_select():
     #return render_template('predict.html') 
     #return render_template('customerview_select.html') 
 
-
-
-
-
 @app.route('/cleanup/', methods = ['POST', 'GET'])
 def cleanup():
 #    if request.method == 'GET':
@@ -141,7 +152,7 @@ def webscraperrun():
     #NOT USED FOR NOW
     #scraper()
     #################
-    print("past scraper")
+
 
     info=actualmodel.filename
     score=actualmodel.accuracy_score
@@ -174,16 +185,17 @@ def model_create_selected():
         selected_model=form_data['selected_model']
         filename="./model/savedmodels/"+selected_model+str(ts)+".model"
 
-        if selected_model == 'linearregression_prev':
+        if selected_model == 'linearregression':
             #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
             now_model=Model(filename,LinearRegression())
             now_model.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
             now_model.save()
             actualmodel=now_model
             
-        if selected_model == 'linearregression':
+        if selected_model == 'linearregression_next':
+            debug(DEBUG,"in lin regr model")
             #createmodel(LinearRegression(),form_data['ratio'],form_data['balance'])
-            now_model=Model(filename,make_pipeline(StandardScaler(), LogisticRegression()))
+            now_model=Model(filename,make_pipeline(LinearRegression(), MLPRegressor(random_state=1, max_iter=500)))
             now_model.fit_model(inpdata.X_train,inpdata.y_train,inpdata.X_test,inpdata.y_test)
             now_model.save()
             actualmodel=now_model
